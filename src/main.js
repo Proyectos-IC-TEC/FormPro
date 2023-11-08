@@ -1,5 +1,7 @@
 import { createApp } from "vue";
 import App from "./App.vue";
+import router from "./router";
+import store from "./store";
 
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker
@@ -12,4 +14,10 @@ if ("serviceWorker" in navigator) {
     });
 }
 
-createApp(App).mount("#app");
+const app = createApp(App);
+app.use(router);
+app.use(store);
+
+store.dispatch("autoLogin").then(() => {
+  app.mount("#app");
+});
