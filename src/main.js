@@ -5,7 +5,7 @@ import store from "./store";
 
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker
-    .register("./registerServiceWorker.js") // Ruta correcta del service worker
+    .register("../registerServiceWorker.js") // Ruta correcta del service worker
     .then((registration) => {
       console.log("Service Worker registrado con éxito:", registration);
     })

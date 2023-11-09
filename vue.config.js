@@ -1,7 +1,7 @@
 const { defineConfig } = require("@vue/cli-service");
 module.exports = defineConfig({
   transpileDependencies: true,
-  publicPath: "./", // Ajusta esto según tu configuración
+  publicPath: "/", // Ajusta esto según tu configuración
   productionSourceMap: false, // Desactiva los mapas de origen en producción
   pwa: {
     name: "Mi Aplicación", // Cambia el nombre a tu aplicación
@@ -15,7 +15,7 @@ module.exports = defineConfig({
 
     workboxOptions: {
       // swSrc es obligatorio en el modo InjectManifest
-      swSrc: "src/registerServiceWorker.js", // Ruta al archivo Service Worker personalizado
+      swSrc: "registerServiceWorker.js", // Ruta al archivo Service Worker personalizado
 
       // ...otras opciones de Workbox...
     },

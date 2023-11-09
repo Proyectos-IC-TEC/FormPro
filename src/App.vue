@@ -44,6 +44,7 @@ nav {
   display: flex;
   justify-content: space-around;
 }
+
 nav a {
   color: white;
   text-decoration: none;
