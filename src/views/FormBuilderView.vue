@@ -1,52 +1,69 @@
 <template>
   <div>
+    <!-- Contructur del Formulario -->
     <h2>Constructor de Formularios</h2>
-    <label>Pregunta:</label>
-    <input type="text" v-model="preguntaActual.label" />
-    <label>Tipo de Respuesta:</label>
-    <select v-model="preguntaActual.tipo">
-      <option value="texto">Texto</option>
-      <option value="numero">Número</option>
-      <option value="archivo">Archivo</option>
-      <option value="combobox">Combobox</option>
-      <!-- Agrega otros tipos de preguntas según tus necesidades -->
-    </select>
-
-    <template v-if="preguntaActual.tipo === 'combobox'">
-      <label>Seleccione el tipo de selección:</label>
-      <select v-model="preguntaActual.multiple">
-        <option value="true">Múltiple</option>
-        <option value="false">Única</option>
+    <div class="build-section">
+      <label>Nombre del Formulario:</label>
+      <input type="text" v-model="nombreFormulario" required />
+      <hr />
+      <label>Pregunta:</label>
+      <input type="text" v-model="preguntaActual.label" required />
+      <br />
+      <br />
+      <label>Tipo de Respuesta:</label>
+      <select v-model="preguntaActual.tipo">
+        <option value="texto">Texto</option>
+        <option value="numero">Número</option>
+        <option value="archivo">Archivo</option>
+        <option value="combobox">Combobox</option>
       </select>
-      <label>Opciones:</label>
-      <input type="text" v-model="opcion" @keyup.enter="agregarOpcion" />
-      <button @click="agregarOpcion">Agregar Opción</button>
-      <ul>
-        <li v-for="(opcion, index) in preguntaActual.opciones" :key="index">
-          {{ opcion.label }}
-        </li>
-      </ul>
-    </template>
-
+      <br />
+      <br />
+      <template v-if="preguntaActual.tipo === 'combobox'">
+        <label>Seleccione el tipo de selección:</label>
+        <select v-model="preguntaActual.multiple">
+          <option value="true">Múltiple</option>
+          <option value="false">Única</option>
+        </select>
+        <br />
+        <br />
+        <label>Opciones:</label>
+        <input type="text" v-model="opcion" @keyup.enter="agregarOpcion" />
+        <button @click="agregarOpcion">Agregar Opción</button>
+        <ul>
+          <li v-for="(opcion, index) in preguntaActual.opciones" :key="index">
+            {{ opcion.label }}
+          </li>
+        </ul>
+      </template>
+    </div>
     <button @click="agregarPregunta">Agregar Pregunta</button>
+    <hr />
 
-    <h3>Vista Previa del Formulario</h3>
-    <div v-for="(pregunta, index) in preguntas" :key="index">
-      <div>
-        <form-field
-          :pregunta="pregunta"
-          @file-selected="handleFileSelected"
-        ></form-field>
-        <button @click="eliminarPregunta(index)">Eliminar Pregunta</button>
+    <!-- Vista Previa del Formulario -->
+    <h2>Vista Previa del Formulario</h2>
+    <div class="preview-section">
+      <p><strong>Nombre del Formulario:</strong> {{ nombreFormulario }}</p>
+      <div v-for="(pregunta, index) in preguntas" :key="index">
+        <div>
+          <form-field
+            :pregunta="pregunta"
+            @file-selected="handleFileSelected"
+          ></form-field>
+          <button @click="eliminarPregunta(index)">Eliminar Pregunta</button>
+        </div>
+        <br />
       </div>
     </div>
-
+    <hr />
     <button @click="guardarFormulario">Guardar Formulario</button>
   </div>
 </template>
 
 <script>
 import FormField from "@/components/FormField.vue"; // Asegúrate de importar el componente FormField
+import { getAuth } from "firebase/auth";
+import { getFirestore, addDoc, collection } from "firebase/firestore";
 
 export default {
   components: {
@@ -54,6 +71,7 @@ export default {
   },
   data() {
     return {
+      nombreFormulario: "", // Nombre del formulario
       preguntaActual: {
         label: "", // Texto de la pregunta
         tipo: "texto", // Tipo de respuesta esperada (por defecto, texto)
@@ -100,8 +118,64 @@ export default {
       console.log("Archivo seleccionado:", file);
     },
     guardarFormulario() {
-      // Enviar preguntas a tu backend
+      const auth = getAuth();
+      const usuario = auth.currentUser; // Obtener el usuario actualmente autenticado
+
+      if (usuario) {
+        try {
+          // Obtiene una instancia de Firestore
+          const db = getFirestore();
+
+          // Crea un documento en la colección "formularios"
+          addDoc(collection(db, "formularios"), {
+            nombre: this.nombreFormulario,
+            preguntas: this.preguntas,
+            usuario: usuario.uid, // Almacena el ID del usuario que creó el formulario
+          });
+
+          window.alert("Formulario guardado correctamente!");
+
+          // Restablece el formulario después de guardarlo
+          this.resetForm();
+        } catch (error) {
+          console.error("Error al guardar el formulario:", error);
+        }
+      } else {
+        console.error(
+          "Usuario no autenticado. Por favor, inicia sesión para guardar el formulario."
+        );
+      }
     },
+
+    resetForm() {
+      // Restablece los datos del formulario
+      (this.nombreFormulario = ""),
+        (this.preguntaActual = {
+          label: "",
+          tipo: "texto",
+          multiple: false,
+          opciones: [],
+        }),
+        (this.preguntas = [
+          {
+            label: "Ingresa tu nombre completo:",
+            tipo: "texto",
+            multiple: false,
+            opciones: [],
+          },
+          {
+            label: "Ingresa tu correo electrónico",
+            tipo: "texto",
+            multiple: false,
+            opciones: [],
+          },
+        ]),
+        (this.opciones = "");
+    },
+  },
+  created() {
+    // Inicializa los datos del formulario cuando se carga el componente
+    this.resetForm();
   },
 };
 </script>
