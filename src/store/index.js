@@ -1,6 +1,6 @@
 import { createStore } from "vuex";
 import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import app from "../firebaseConfig";
+import app from "@/firebaseConfig";
 
 export default createStore({
   state: {
@@ -29,6 +29,7 @@ export default createStore({
       }
     },
     async logout({ commit }) {
+      console.log("Deslogueando...");
       const auth = getAuth(app);
       try {
         await signOut(auth);
