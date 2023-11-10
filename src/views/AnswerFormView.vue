@@ -4,6 +4,7 @@
     <p><strong>Nombre del Formulario:</strong> {{ formData.nombre }}</p>
     <div>
       <form-field
+        ref="formFieldComponent"
         v-for="(pregunta, index) in formData.preguntas"
         :key="index"
         :pregunta="pregunta"
@@ -153,32 +154,29 @@ export default {
     },
 
     enviarForm() {
-      // Copia el formData y agrega los atributos de respuesta y ID del formulario
-      const respuestasData = {
-        ...this.formData,
-        respuestas: this.respuestas,
-        idForm: this.formId,
-      };
+      if (this.formCompletado) {
+        // Copia el formData y agrega los atributos de respuesta y ID del formulario
+        const respuestasData = {
+          ...this.formData,
+          respuestas: this.respuestas,
+          idForm: this.formId,
+        };
 
-      const db = getFirestore();
-      const respuestasCollectionRef = collection(db, "respuestas");
-      console.log("Data de la respuesta", respuestasData);
-      addDoc(respuestasCollectionRef, respuestasData)
-        .then(() => {
-          window.alert("¡Respuesta enviada correctamente!");
-          // Puedes redirigir al usuario a una página de éxito o realizar otras acciones después de enviar las respuestas
-          this.limpiarDatos();
-        })
-        .catch((error) => {
-          console.error("Error al enviar respuestas a Firestore:", error);
-        });
-    },
-
-    limpiarDatos() {
-      // Restablece los datos a sus valores iniciales
-      this.respuestas = [];
-      this.formCompletado = false;
-      this.traerFormulario();
+        const db = getFirestore();
+        const respuestasCollectionRef = collection(db, "respuestas");
+        console.log("Data de la respuesta", respuestasData);
+        addDoc(respuestasCollectionRef, respuestasData)
+          .then(() => {
+            window.alert("¡Respuesta enviada correctamente!");
+            // Puedes redirigir al usuario a una página de éxito o realizar otras acciones después de enviar las respuestas
+            window.location.reload();
+          })
+          .catch((error) => {
+            console.error("Error al enviar respuestas a Firestore:", error);
+          });
+      } else {
+        window.alert("¡Error, El form no esta completo");
+      }
     },
   },
 };
