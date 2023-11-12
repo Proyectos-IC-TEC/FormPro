@@ -3,6 +3,7 @@ import LoginView from "@/views/LoginView.vue";
 import ReportsView from "@/views/ReportsView.vue";
 import FormBuilderView from "@/views/FormBuilderView.vue";
 import AnswerFormView from "@/views/AnswerFormView.vue";
+import AnswersView from "@/views/AnswersView.vue";
 import app from "@/firebaseConfig";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 const auth = getAuth(app);
@@ -37,6 +38,12 @@ const routes = [
     path: "/form-builder",
     name: "FormBuilder",
     component: FormBuilderView,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/answers/:formId",
+    name: "AnswersView",
+    component: AnswersView,
     meta: { requiresAuth: true },
   },
   {

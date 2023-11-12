@@ -86,7 +86,7 @@ export default {
 
     guardarRespuesta(index, respuesta) {
       // Almacena la respuesta en el array de respuestas
-      this.respuestas[index] = { pregunta: index, respuesta };
+      this.respuestas[index] = { respuesta };
       let todosDefinidos = true;
       if (this.formData.preguntas.length === this.respuestas.length) {
         for (let i = 0; i < this.respuestas.length; i++) {
@@ -119,8 +119,7 @@ export default {
           if (downloadURL) {
             window.alert("¡Archivo subido exitosamente!");
             this.respuestas[index] = {
-              pregunta: index,
-              resultado: downloadURL,
+              respuesta: downloadURL,
             };
             let todosDefinidos = true;
             if (this.formData.preguntas.length === this.respuestas.length) {
