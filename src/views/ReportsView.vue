@@ -86,8 +86,11 @@ export default {
         console.error("Error al recuperar formularios:", error);
       }
     },
-    async verRespuestas() {
-      // Implementar lógica para ver las respuestas del formulario con ID 'formularioId'
+    async verRespuestas(formularioId) {
+      this.$router.push({
+        name: "AnswersView",
+        params: { formId: formularioId },
+      });
     },
     async generarEnlace(formularioId) {
       // Lógica para generar el enlace único con formularioId
