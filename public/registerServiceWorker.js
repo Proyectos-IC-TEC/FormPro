@@ -1,7 +1,7 @@
 /* service worker */
 
 // Nombre del caché
-const CACHE_NAME = "mi-pwa-cache";
+const CACHE_NAME = "cache_formpro";
 
 // Archivos a ser almacenados en el caché
 const urlsToCache = ["/", "/index.html"];

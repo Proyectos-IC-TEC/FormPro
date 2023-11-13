@@ -1,15 +1,12 @@
 <template>
   <div>
     <!-- Contructur del Formulario -->
-    <h2>Constructor de Formularios</h2>
+    <h2 class="tittle-form">Constructor de Formularios</h2>
     <div class="build-section">
       <label>Nombre del Formulario:</label>
       <input type="text" v-model="nombreFormulario" required />
-      <hr />
       <label>Pregunta:</label>
       <input type="text" v-model="preguntaActual.label" required />
-      <br />
-      <br />
       <label>Tipo de Respuesta:</label>
       <select v-model="preguntaActual.tipo">
         <option value="texto">Texto</option>
@@ -17,16 +14,12 @@
         <option value="archivo">Archivo</option>
         <option value="combobox">Combobox</option>
       </select>
-      <br />
-      <br />
       <template v-if="preguntaActual.tipo === 'combobox'">
         <label>Seleccione el tipo de selección:</label>
         <select v-model="preguntaActual.multiple">
           <option value="true">Múltiple</option>
           <option value="false">Única</option>
         </select>
-        <br />
-        <br />
         <label>Opciones:</label>
         <input type="text" v-model="opcion" @keyup.enter="agregarOpcion" />
         <button @click="agregarOpcion">Agregar Opción</button>
@@ -38,25 +31,18 @@
       </template>
     </div>
     <button @click="agregarPregunta">Agregar Pregunta</button>
-    <hr />
-
     <!-- Vista Previa del Formulario -->
-    <h2>Vista Previa del Formulario</h2>
+    <h2 class="tittle-form">Vista Previa del Formulario</h2>
     <div class="preview-section">
       <p><strong>Nombre del Formulario:</strong> {{ nombreFormulario }}</p>
       <div v-for="(pregunta, index) in preguntas" :key="index">
         <div>
-          <form-field
-            :pregunta="pregunta"
-            @file-selected="handleFileSelected"
-          ></form-field>
+          <form-field :pregunta="pregunta" @file-selected="handleFileSelected"></form-field>
           <button @click="eliminarPregunta(index)">Eliminar Pregunta</button>
         </div>
-        <br />
       </div>
     </div>
-    <hr />
-    <button @click="guardarFormulario">Guardar Formulario</button>
+    <button class="save-form" @click="guardarFormulario">Guardar Formulario</button>
   </div>
 </template>
 
@@ -64,6 +50,7 @@
 import FormField from "@/components/FormField.vue"; // Asegúrate de importar el componente FormField
 import { getAuth } from "firebase/auth";
 import { getFirestore, addDoc, collection } from "firebase/firestore";
+import "../components/styles.css";
 
 export default {
   components: {
@@ -78,7 +65,7 @@ export default {
         multiple: false, // Para combobox, indica si es selección múltiple o única
         opciones: [], // Para combobox, almacena las opciones
       },
-      preguntas: [], // Almacena las preguntas y sus tipos
+      preguntas: [], // Almacena las preguntas y sus tipos)
       opcion: "", // Almacena temporalmente las opciones del combobox
     };
   },

@@ -1,14 +1,27 @@
 <template>
-  <div>
+  <div class="login">
     <h2>Login</h2>
-    <button @click="loginWithGoogle">Continuar con Google</button>
+    <button class="google-button" @click="loginWithGoogle">
+      <svg-icon type="mdi" :path="path" class="google-icon"></svg-icon>
+      <p class="google-text">Continuar con Google</p>
+    </button>
   </div>
 </template>
 
 <script>
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-
+import SvgIcon from '@jamescoyle/vue-icon';
+import { mdiGoogle } from '@mdi/js';
+import "../components/styles.css";
 export default {
+  components: {
+    SvgIcon
+  },
+  data() {
+    return {
+      path: mdiGoogle,
+    }
+  },
   methods: {
     async loginWithGoogle() {
       const auth = getAuth();
@@ -17,7 +30,6 @@ export default {
       try {
         // Inicia sesión con Google utilizando una ventana emergente
         await signInWithPopup(auth, provider);
-        console.log("Usuario autenticado");
         // Redirige al usuario a la página de reports después del login
         this.$router.push("/reports");
       } catch (error) {
