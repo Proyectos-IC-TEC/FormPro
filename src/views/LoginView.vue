@@ -16,9 +16,8 @@ export default {
 
       try {
         // Inicia sesión con Google utilizando una ventana emergente
-        const userCredential = await signInWithPopup(auth, provider);
-        const user = userCredential.user;
-        console.log("Usuario autenticado:", user);
+        await signInWithPopup(auth, provider);
+        console.log("Usuario autenticado");
         // Redirige al usuario a la página de reports después del login
         this.$router.push("/reports");
       } catch (error) {

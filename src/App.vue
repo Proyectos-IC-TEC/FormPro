@@ -25,7 +25,7 @@ export default {
       this.$store
         .dispatch("logout")
         .then(() => {
-          this.$router.push("/");
+          this.$router.push("/login");
         })
         .catch((error) => {
           console.error("Error al cerrar sesión:", error.message);
