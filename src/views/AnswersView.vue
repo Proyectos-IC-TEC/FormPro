@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>Respuestas del Formulario</h2>
-    <table>
+    <table class="responses-table">
       <thead>
         <tr>
           <th>Nombre</th>
@@ -21,8 +21,8 @@
     </table>
 
     <!-- Modal para mostrar detalles -->
-    <div v-if="modalVisible">
-      <div>
+    <div v-if="modalVisible" class="modal">
+      <div class="modal-content">
         <!-- Contenido del modal -->
         <h3>Detalles del Formulario</h3>
         <p>Nombre: {{ data.respuestas[0].respuesta }}</p>
@@ -33,7 +33,7 @@
           </li>
         </ul>
         <!-- Botón para cerrar el modal -->
-        <button @click="cerrarModal">Cerrar</button>
+        <button class="close-button" @click="cerrarModal">Cerrar</button>
       </div>
     </div>
   </div>
@@ -47,7 +47,7 @@ import {
   where,
   getDocs,
 } from "firebase/firestore";
-
+import "../components/styles.css";
 export default {
   data() {
     return {

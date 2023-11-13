@@ -1,7 +1,7 @@
 {
-  "name": "Mi Progressive Web App",
-  "short_name": "Mi PWA",
-  "description": "Una descripción de mi Progressive Web App",
+  "name": "FormPro",
+  "short_name": "FormPro",
+  "description": "Aplicacion para creacion de formularios en pwa",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

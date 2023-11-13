@@ -1,17 +1,15 @@
 <template>
   <div>
-    <h2>Reportes</h2>
+    <h2 class="tittle-form">Reportes</h2>
     <!-- Listado de formularios -->
-    <ul>
-      <li v-for="formulario in formularios" :key="formulario.id">
+    <ul class="form-list">
+      <li v-for="formulario in formularios" :key="formulario.id" class="form-item">
         {{ formulario.nombre }}
-        <button @click="verRespuestas(formulario.id)">Ver Respuestas</button>
-        <button @click="generarEnlace(formulario.id)">
-          Generar enlace para responder
-        </button>
-        <button @click="eliminarFormulario(formulario.id)">
-          Eliminar Formulario
-        </button>
+        <div class="form-buttons">
+          <button @click="verRespuestas(formulario.id)">Ver Respuestas</button>
+          <button @click="generarEnlace(formulario.id)">Generar enlace para responder</button>
+          <button @click="eliminarFormulario(formulario.id)">Eliminar Formulario</button>
+        </div>
       </li>
     </ul>
 
@@ -27,6 +25,7 @@
 </template>
 
 <script>
+import "../components/styles.css";
 import app from "@/firebaseConfig";
 import { onAuthStateChanged, getAuth } from "firebase/auth";
 
