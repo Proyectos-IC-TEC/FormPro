@@ -10,17 +10,17 @@
 
 <script>
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import SvgIcon from '@jamescoyle/vue-icon';
-import { mdiGoogle } from '@mdi/js';
-import "../components/styles.css";
+import SvgIcon from "@jamescoyle/vue-icon";
+import { mdiGoogle } from "@mdi/js";
+import "@/styles/styles.css";
 export default {
   components: {
-    SvgIcon
+    SvgIcon,
   },
   data() {
     return {
       path: mdiGoogle,
-    }
+    };
   },
   methods: {
     async loginWithGoogle() {

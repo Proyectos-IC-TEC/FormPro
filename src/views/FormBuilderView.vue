@@ -30,19 +30,26 @@
         </ul>
       </template>
     </div>
-    <button @click="agregarPregunta">Agregar Pregunta</button>
+    <button class="add-question" @click="agregarPregunta">
+      Agregar Pregunta
+    </button>
     <!-- Vista Previa del Formulario -->
     <h2 class="tittle-form">Vista Previa del Formulario</h2>
     <div class="preview-section">
       <p><strong>Nombre del Formulario:</strong> {{ nombreFormulario }}</p>
       <div v-for="(pregunta, index) in preguntas" :key="index">
         <div>
-          <form-field :pregunta="pregunta" @file-selected="handleFileSelected"></form-field>
+          <form-field
+            :pregunta="pregunta"
+            @file-selected="handleFileSelected"
+          ></form-field>
           <button @click="eliminarPregunta(index)">Eliminar Pregunta</button>
         </div>
       </div>
     </div>
-    <button class="save-form" @click="guardarFormulario">Guardar Formulario</button>
+    <button class="save-form" @click="guardarFormulario">
+      Guardar Formulario
+    </button>
   </div>
 </template>
 
@@ -50,7 +57,7 @@
 import FormField from "@/components/FormField.vue"; // Asegúrate de importar el componente FormField
 import { getAuth } from "firebase/auth";
 import { getFirestore, addDoc, collection } from "firebase/firestore";
-import "../components/styles.css";
+import "@/styles/styles.css";
 
 export default {
   components: {
@@ -145,7 +152,7 @@ export default {
         }),
         (this.preguntas = [
           {
-            label: "Ingresa tu nombre completo:",
+            label: "Ingresa tu nombre completo",
             tipo: "texto",
             multiple: false,
             opciones: [],

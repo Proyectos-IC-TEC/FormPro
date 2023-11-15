@@ -1,18 +1,28 @@
 <template>
   <div v-if="formData">
     <h2 class="tittle-form">Responder Formulario</h2>
-    <p class="answer_form"><strong>Nombre del Formulario:</strong> {{ formData.nombre }}</p>
+    <p class="answer_form">
+      <strong>Nombre del Formulario:</strong> {{ formData.nombre }}
+    </p>
     <div>
-      <form-field class="form-field" ref="formFieldComponent" v-for="(pregunta, index) in formData.preguntas" :key="index"
-        :pregunta="pregunta" @respuesta-cambiada="guardarRespuesta(index, $event)"
-        @file-selected="guardarArchivo(index, $event)"></form-field>
+      <form-field
+        class="form-field"
+        ref="formFieldComponent"
+        v-for="(pregunta, index) in formData.preguntas"
+        :key="index"
+        :pregunta="pregunta"
+        @respuesta-cambiada="guardarRespuesta(index, $event)"
+        @file-selected="guardarArchivo(index, $event)"
+      ></form-field>
     </div>
-    <button :disabled="!formCompletado" @click="enviarForm">Enviar</button>
+    <button class="send-form" :disabled="!formCompletado" @click="enviarForm">
+      Enviar
+    </button>
   </div>
 </template>
 
 <script>
-import "../components/styles.css";
+import "@/styles/styles.css";
 import FormField from "@/components/FormField.vue"; // Asegúrate de importar el componente FormField
 import {
   getFirestore,

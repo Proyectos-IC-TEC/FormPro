@@ -15,12 +15,12 @@
 </template>
 
 <script>
-import SvgIcon from '@jamescoyle/vue-icon';
-import { mdiLogout } from '@mdi/js';
-import "./components/styles.css";
+import SvgIcon from "@jamescoyle/vue-icon";
+import { mdiLogout } from "@mdi/js";
+import "@/styles/styles.css";
 export default {
   components: {
-    SvgIcon
+    SvgIcon,
   },
   data() {
     return {

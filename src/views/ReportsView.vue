@@ -3,20 +3,30 @@
     <h2 class="tittle-form">Reportes</h2>
     <!-- Listado de formularios -->
     <ul class="form-list">
-      <li v-for="formulario in formularios" :key="formulario.id" class="form-item">
+      <li
+        v-for="formulario in formularios"
+        :key="formulario.id"
+        class="form-item"
+      >
         {{ formulario.nombre }}
         <div class="form-buttons">
-          <button @click="verRespuestas(formulario.id)">Ver Respuestas</button>
-          <button @click="generarEnlace(formulario.id)">Generar enlace para responder</button>
-          <button @click="eliminarFormulario(formulario.id)">Eliminar Formulario</button>
+          <button class="btn-show" @click="verRespuestas(formulario.id)">
+            Ver Respuestas
+          </button>
+          <button class="btn-link" @click="generarEnlace(formulario.id)">
+            Generar enlace para responder
+          </button>
+          <button class="btn-delete" @click="eliminarFormulario(formulario.id)">
+            Eliminar Formulario
+          </button>
         </div>
       </li>
     </ul>
 
     <!-- Modal para mostrar el enlace generado -->
-    <div class="modal" v-if="enlaceModalVisible">
-      <div class="modal-content">
-        <span class="close" @click="cerrarModal">&times;</span>
+    <div class="report-modal" v-if="enlaceModalVisible">
+      <div class="report-modal-content">
+        <button class="report-modal-close" @click="cerrarModal">Cerrar</button>
         <h3>Enlace para Responder el Formulario:</h3>
         <p>{{ enlaceGenerado }}</p>
       </div>
@@ -25,7 +35,7 @@
 </template>
 
 <script>
-import "../components/styles.css";
+import "@/styles/styles.css";
 import app from "@/firebaseConfig";
 import { onAuthStateChanged, getAuth } from "firebase/auth";
 
@@ -119,43 +129,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-/* Estilos para el modal */
-.modal {
-  display: block;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-.modal-content {
-  background-color: #fefefe;
-  margin: 10% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  position: relative;
-}
-
-.close {
-  color: #aaa;
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-</style>

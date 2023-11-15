@@ -25,10 +25,11 @@ nav a:hover,
 
 .logout-button {
   background: none;
-  color: #fff; /* Color del texto del botón */
+  color: #fff;
   border: none;
   cursor: pointer;
   font-size: 14px;
+  transition: background-color 0.3s;
 }
 
 /* Estilos para el formulario de construcción */
@@ -51,11 +52,18 @@ nav a:hover,
 }
 
 .build-section button {
-  background-color: #283246;
+  background-color: #333e56;
   color: white;
-  padding: 10px;
-  border: none;
+  padding: 5px;
   cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.build-section button:hover {
+  background-color: #1a232d; 
+  color: #fff; 
 }
 
 /* Estilos para la vista previa del formulario */
@@ -64,23 +72,36 @@ nav a:hover,
 }
 
 .preview-section button {
+  font-size: 14px;
+  font-weight: bold;
   width: 150px;
   height: 35px;
-  background-color: #dc3545;
+  background-color: rgb(190, 37, 37);
   color: white;
   padding: 8px;
-  border: none;
   cursor: pointer;
+  transition: background-color 0.3s; 
   margin-bottom: 20px;
 }
 
+.preview-section button:hover {
+  background-color: rgb(134, 0, 0);
+}
+
 .save-form {
-  width: 150px;
+  font-size: 14px;
+  font-weight: bold;
+  width: 160px;
   height: 35px;
   background-color: blue;
   color: white;
   padding: 8px;
   cursor: pointer;
+  transition: background-color 0.3s; 
+}
+
+.save-form:hover {
+  background-color: rgb(0, 0, 164);
 }
 
 /* Estilos para las opciones en el formulario de construcción */
@@ -102,13 +123,61 @@ nav a:hover,
   background: rgb(128, 128, 128);
 }
 
+.add-question {
+  font-size: 14px;
+  font-weight: bold;
+  width: 150px;
+  height: 35px;
+  background-color: rgb(14, 134, 32);
+  color: white;
+  padding: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s; 
+}
+
+/* Estilo cuando el mouse está sobre el botón */
+.add-question:hover {
+  background-color: rgb(0, 102, 15);
+  color: #fff;
+}
+
+/* Estilos para el evio del form */
 .answer_form {
   text-align: center;
 }
 
+.send-form {
+  font-size: 14px;
+  font-weight: bold;
+  width: 150px;
+  height: 35px;
+  padding: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Estilo por defecto */
+.send-form {
+  background-color: rgb(18, 97, 29);
+  color: white;
+}
+
+/* Estilo cuando el mouse está sobre el botón */
+.send-form:hover {
+  background-color: rgb(0, 140, 40); /* Puedes ajustar estos valores según tus preferencias */
+  color: #fff; /* Puedes ajustar el color del texto en el hover */
+}
+
+/* Estilo cuando el botón está deshabilitado */
+.send-form:disabled {
+  background-color: rgba(14, 80, 23, 0.5); /* Hace el color de fondo más oscuro */
+  color: rgba(255, 255, 255, 0.5); /* Hace el color del texto más claro */
+  cursor:auto;
+}
+
 /* Estilo del contenedor del formulario */
 .form-field-container {
-  margin-bottom: 15px; /* Espacio entre cada campo del formulario */
+  margin-top: 15px; /* Espacio entre cada campo del formulario */
 }
 
 /* Estilo de la etiqueta de la pregunta */
@@ -122,7 +191,7 @@ nav a:hover,
   width: 100%; /* O ajusta el ancho según tus necesidades */
   padding: 8px;
   box-sizing: border-box; /* Evita que el padding afecte al ancho total */
-  margin-bottom: 10px; /* Espacio inferior entre los diferentes tipos de campos */
+  margin-bottom: 5px; /* Espacio inferior entre los diferentes tipos de campos */
 }
 
 /* Estilo del campo de archivo */
@@ -190,7 +259,33 @@ nav a:hover,
 }
 
 .form-buttons button {
+  font-size: 14px;
+  font-weight: bold;
   margin-left: 10px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out ease-in-out;
+}
+
+/* Estilo base para los botones */
+.btn-delete {
+  background-color: #dc3545; /* Color de fondo para btn-delete */
+  color: white;
+}
+
+.btn-show {
+  background-color: #007bff; /* Color de fondo para btn-show */
+  color: white;
+}
+
+.btn-link {
+  background-color: #17a2b8; /* Color de fondo para btn-link */
+  color: white;
+}
+
+/* Efecto hover para todos los botones */
+.form-buttons button:hover {
+  filter: brightness(90%); /* Reduce ligeramente la luminosidad en hover */
 }
 
 /* Estilos para el modal */
@@ -213,6 +308,13 @@ nav a:hover,
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
+}
+
+.modal-content li {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #333;
 }
 
 .close {
@@ -246,6 +348,22 @@ nav a:hover,
 .responses-table th {
   background-color: #f2f2f2;
 }
+
+.responses-table button {
+  font-size: 14px;
+  font-weight: bold;
+  background-color: #28a745; /* Color de fondo para el botón */
+  color: white;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out ease-in-out;
+}
+
+.responses-table button:hover {
+  background-color: #218838; /* Color de fondo en hover */
+  filter: brightness(90%); /* Reduce ligeramente la luminosidad en hover */
+}
+
 
 /* Estilos para el modal */
 .modal {
@@ -286,11 +404,53 @@ nav a:hover,
   right: 10px;
   background-color: red;
   color: white;
-  border: none;
   padding: 10px 15px;
+  font-size: 14px;
+  font-weight: bold;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .modal-content button.close-button:hover {
+  background-color: darkred;
+}
+
+/* Estilos para el modal del enlace report */
+.report-modal {
+  display: block;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.report-modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  position: relative;
+}
+
+.report-modal-close {
+  background-color: red;
+  color: #fff;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  transition: background-color 0.3s;
+}
+
+.report-modal-close:hover,
+.report-modal-close:focus {
   background-color: darkred;
 }

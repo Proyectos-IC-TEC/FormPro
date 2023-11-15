@@ -2,17 +2,35 @@
   <div class="form-field-container">
     <label class="form-label">{{ pregunta.label }}</label>
     <template v-if="pregunta.tipo === 'texto'">
-      <input type="text" class="form-input" @input="onInputChange" @blur="onInputBlur" />
+      <input
+        type="text"
+        class="form-input"
+        @input="onInputChange"
+        @blur="onInputBlur"
+      />
     </template>
     <template v-else-if="pregunta.tipo === 'numero'">
-      <input type="number" class="form-input" @input="onInputChange" @blur="onInputBlur" />
+      <input
+        type="number"
+        class="form-input"
+        @input="onInputChange"
+        @blur="onInputBlur"
+      />
     </template>
     <template v-else-if="pregunta.tipo === 'archivo'">
       <input type="file" class="form-file-input" @change="onFileChange" />
     </template>
     <template v-else-if="pregunta.tipo === 'combobox'">
-      <select class="form-select" @change="onComboboxChange" :multiple="pregunta.multiple">
-        <option v-for="(opcion, index) in pregunta.opciones" :value="opcion.valor" :key="index">
+      <select
+        class="form-select"
+        @change="onComboboxChange"
+        :multiple="pregunta.multiple"
+      >
+        <option
+          v-for="(opcion, index) in pregunta.opciones"
+          :value="opcion.valor"
+          :key="index"
+        >
           {{ opcion.label }}
         </option>
       </select>
@@ -21,7 +39,7 @@
 </template>
 
 <script>
-import "../components/styles.css";
+import "@/styles/styles.css";
 export default {
   props: {
     pregunta: Object,

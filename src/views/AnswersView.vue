@@ -4,8 +4,8 @@
     <table class="responses-table">
       <thead>
         <tr>
-          <th>Nombre</th>
-          <th>Correo</th>
+          <th>Nombre completo</th>
+          <th>Correo electrónico</th>
           <th>Acciones</th>
         </tr>
       </thead>
@@ -25,11 +25,20 @@
       <div class="modal-content">
         <!-- Contenido del modal -->
         <h3>Detalles del Formulario</h3>
-        <p>Nombre: {{ data.respuestas[0].respuesta }}</p>
-        <p>Correo: {{ data.respuestas[1].respuesta }}</p>
         <ul>
           <li v-for="(pregunta, index) in data.preguntas" :key="index">
-            {{ pregunta.label }} : {{ data.respuestas[index].respuesta }}
+            {{ pregunta.label }} :
+            <span v-if="pregunta.tipo === 'archivo'">
+              <a :href="data.respuestas[index].respuesta" target="_blank"
+                >Ver Archivo</a
+              >
+            </span>
+            <span v-else-if="pregunta.multiple">
+              {{ mostrarRespuestasMultiples(data.respuestas[index].respuesta) }}
+            </span>
+            <span v-else>
+              {{ data.respuestas[index].respuesta }}
+            </span>
           </li>
         </ul>
         <!-- Botón para cerrar el modal -->
@@ -47,7 +56,7 @@ import {
   where,
   getDocs,
 } from "firebase/firestore";
-import "../components/styles.css";
+import "@/styles/styles.css";
 export default {
   data() {
     return {
@@ -81,6 +90,13 @@ export default {
       // Abrir el modal y mostrar detalles
       this.modalVisible = true;
       this.data = data;
+    },
+    mostrarRespuestasMultiples(respuestasMultiples) {
+      if (Array.isArray(respuestasMultiples)) {
+        return respuestasMultiples.join(", ");
+      } else {
+        return respuestasMultiples;
+      }
     },
     cerrarModal() {
       // Cerrar el modal
