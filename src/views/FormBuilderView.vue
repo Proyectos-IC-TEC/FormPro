@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import FormField from "@/components/FormField.vue"; // Asegúrate de importar el componente FormField
+import FormField from "@/components/FormField.vue";
 import { getAuth } from "firebase/auth";
 import { getFirestore, addDoc, collection } from "firebase/firestore";
 import "@/styles/styles.css";
